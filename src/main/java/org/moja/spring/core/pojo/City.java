@@ -1,6 +1,7 @@
 package org.moja.spring.core.pojo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class City {
 
@@ -30,6 +31,7 @@ public class City {
 
 
     @Autowired(required = false)
+    @Qualifier("province2")
     public void setProvince(Province province) {
         this.province = province;
     }

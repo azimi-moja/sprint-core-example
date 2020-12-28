@@ -20,4 +20,15 @@
     </bean>
     -->
 
+    <!-- for Qualifier Annotation -->
+    <bean id="province1" class="org.moja.spring.core.pojo.Province">
+        <property name="name" value="Tehran" />
+        <property name="code" value="1" />
+    </bean>
+
+    <bean id="province2" class="org.moja.spring.core.pojo.Province">
+        <property name="name" value="Mashhad" />
+        <property name="code" value="2" />
+    </bean>
+
 </beans>
