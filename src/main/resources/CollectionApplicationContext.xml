@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- injecting collection definitions here -->
+    <bean name="orgInfo" class="org.moja.spring.core.pojo.OrgInfo">
+        <property name="names">
+            <array>
+                <value>Moja</value>
+                <value>Hamid</value>
+                <value>Amir</value>
+            </array>
+        </property>
+        <property name="positions">
+            <list>
+                <value>Manager</value>
+                <value>Programmer</value>
+                <value>Programmer</value>
+            </list>
+        </property>
+        <property name="levels">
+            <map>
+                <entry key="1" value="Programmer"/>
+                <entry key="2" value="Programmer"/>
+                <entry key="3" value="Programmer"/>
+                <entry key="1" value="Manager"/>
+            </map>
+        </property>
+        <property name="ids">
+            <set>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>1</value>
+            </set>
+        </property>
+        <property name="key">
+            <props>
+                <prop key="name">Moja Azimi</prop>
+                <prop key="age">33</prop>
+            </props>
+        </property>
+        <property name="arrPerson">
+            <array>
+                <ref bean="person1"/>
+                <ref bean="person2"/>
+                <ref bean="person3"/>
+            </array>
+        </property>
+        <property name="listOfPersons">
+            <list>
+                <ref bean="person1"/>
+                <ref bean="person2"/>
+                <ref bean="person3"/>
+            </list>
+        </property>
+        <property name="mapOfPerson">
+            <map>
+                <entry key="1" value-ref="person1"/>
+                <entry key="2" value-ref="person2"/>
+                <entry key="3" value-ref="person3"/>
+            </map>
+        </property>
+        <property name="setOfPerson">
+            <set>
+                <ref bean="person1"/>
+                <ref bean="person2"/>
+                <ref bean="person3"/>
+                <ref bean="person1"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean name="person1" class="org.moja.spring.core.pojo.Person">
+        <property name="firstName" value="Moja"/>
+        <property name="lastName" value="Azimi Vaghar"/>
+        <property name="age" value="33"/>
+    </bean>
+    <bean name="person2" class="org.moja.spring.core.pojo.Person">
+        <property name="firstName" value="Hamid Reza"/>
+        <property name="lastName" value="Azimi Vaghar"/>
+        <property name="age" value="27"/>
+    </bean>
+    <bean name="person3" class="org.moja.spring.core.pojo.Person">
+        <property name="firstName" value="Amir"/>
+        <property name="lastName">
+            <null/>
+        </property>
+        <property name="age" value="26"/>
+    </bean>
+</beans>

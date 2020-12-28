@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- method injection -->
+    <bean name="ticketVendingMachine" class="org.moja.spring.core.di.method.TicketVendingMachine" scope="singleton">
+        <lookup-method name="generateTicket" bean="ticket"/>
+    </bean>
+
+    <bean name="ticket" class="org.moja.spring.core.di.method.Ticket" scope="prototype"/>
+</beans>

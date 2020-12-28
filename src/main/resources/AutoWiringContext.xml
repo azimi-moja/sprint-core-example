@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- auto wiring definitions here -->
+    <!-- auto wiring by name -->
+    <!--
+    <bean id="city" class="org.moja.spring.core.pojo.City" autowire="byName">
+        <property name="name" value="tehran"/>
+        <property name="code" value="21"/>
+    </bean>
+
+    <bean id="province" class="org.moja.pojo.spring.core.Province">
+        <property name="name" value="tehran"/>
+        <property name="code" value="1"/>
+    </bean> -->
+
+    <!-- auto wiring by constructor  args -->
+    <bean id="city" class="org.moja.spring.core.pojo.City" autowire="constructor">
+        <constructor-arg name="name" value="tehran"/>
+        <constructor-arg name="code" value="21"/>
+    </bean>
+
+    <bean id="province" class="org.moja.spring.core.pojo.Province">
+        <property name="name" value="tehran"/>
+        <property name="code" value="1"/>
+    </bean>
+
+</beans>

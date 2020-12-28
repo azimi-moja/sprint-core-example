@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- life cycle callback interface definitions here -->
+    <!-- default-init-method="init" default-destroy-method="destroy" -->
+    <bean id="message" class="org.moja.spring.core.pojo.Message" init-method="initMessage" destroy-method="destroyMessage">
+        <property name="id" value="1"/>
+        <property name="message" value="Moja"/>
+    </bean>
+    <!--
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+    <context:annotation-config />
+    -->
+    <bean class="org.moja.spring.core.cycle.MyBeanFirstPostProcessor"/>
+    <bean class="org.moja.spring.core.cycle.MyBeanSecondPostProcessor"/>
+
+</beans>
