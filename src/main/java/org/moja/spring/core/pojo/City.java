@@ -1,16 +1,12 @@
 package org.moja.spring.core.pojo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class City {
 
     private String name;
     private int code;
     private Province province;
-
-    public City(String name, int code, Province province) {
-        this.name = name;
-        this.code = code;
-        this.province = province;
-    }
 
     public String getName() {
         return name;
@@ -32,6 +28,8 @@ public class City {
         return province;
     }
 
+
+    @Autowired(required = false)
     public void setProvince(Province province) {
         this.province = province;
     }

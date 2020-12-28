@@ -1,6 +1,6 @@
 package org.moja.spring.core.client;
 
-import org.moja.spring.core.pojo.Message;
+import org.moja.spring.core.pojo.City;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,9 +10,11 @@ public class AnnotationsContextExample {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("AnnotationContext.xml");
 
-        Message message = context.getBean("message", Message.class);
+        City city = context.getBean("city", City.class);
+        System.out.println(city.toString());
 
-        System.out.println(message.toString());
-
+        if (city.getProvince() != null) {
+            System.out.println(city.getProvince().toString());
+        }
     }
 }

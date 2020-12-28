@@ -2,7 +2,6 @@ package org.moja.spring.core.pojo;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class Message implements InitializingBean, DisposableBean {
 
     private int id;
-    @Required
     private String message;
 
     public Message() {

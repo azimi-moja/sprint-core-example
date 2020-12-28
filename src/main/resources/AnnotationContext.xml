@@ -4,12 +4,20 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:annotation-config />
+    <context:annotation-config/>
 
     <!-- bean definitions here -->
-    <bean id="message" class="org.moja.spring.core.pojo.Message">
-        <property name="id" value="1"/>
-        <property name="message" value="Moja"/>
+    <bean id="city" class="org.moja.spring.core.pojo.City">
+        <property name="name" value="Tehran"/>
+        <property name="code" value="021"/>
     </bean>
+
+    <!-- for check required, bean set comment -->
+    <!--
+    <bean id="province" class="org.moja.spring.core.pojo.Province">
+        <property name="name" value="Tehran" />
+        <property name="code" value="1" />
+    </bean>
+    -->
 
 </beans>
