@@ -5,6 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <context:component-scan base-package="org.moja.spring.core.pojo"/>
 
     <!-- bean definitions here -->
     <bean id="city" class="org.moja.spring.core.pojo.City">
@@ -22,13 +23,17 @@
 
     <!-- for Qualifier Annotation -->
     <bean id="province1" class="org.moja.spring.core.pojo.Province">
-        <property name="name" value="Tehran" />
-        <property name="code" value="1" />
+        <property name="name" value="Tehran"/>
+        <property name="code" value="1"/>
     </bean>
 
     <bean id="province2" class="org.moja.spring.core.pojo.Province">
-        <property name="name" value="Mashhad" />
-        <property name="code" value="2" />
+        <property name="name" value="Mashhad"/>
+        <property name="code" value="2"/>
+    </bean>
+
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="location" value="classpath:MyApp.properties"/>
     </bean>
 
 </beans>
