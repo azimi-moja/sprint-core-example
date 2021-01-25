@@ -1,6 +1,6 @@
 package org.moja.spring.core.service.impl;
 
-import org.moja.spring.core.dao.RequestPersonDAOImpl;
+import org.moja.spring.core.dao.impl.RequestPersonDAOImpl;
 import org.moja.spring.core.entity.RequestPerson;
 import org.moja.spring.core.service.RequestPersonService;
 

@@ -1,10 +1,11 @@
-package org.moja.spring.core.dao;
+package org.moja.spring.core.dao.impl;
 
+import org.moja.spring.core.dao.RequestSurveyDAO;
 import org.moja.spring.core.entity.RequestSurvey;
 
 import java.util.List;
 
-public class RequestSurveyDAOImpl implements org.moja.spring.core.dao.impl.RequestSurveyDAO {
+public class RequestSurveyDAOImpl implements RequestSurveyDAO {
     @Override
     public void saveRequestSurvey(RequestSurvey requestSurvey) {
 

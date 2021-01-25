@@ -1,6 +1,6 @@
-package org.moja.spring.core.dao;
+package org.moja.spring.core.dao.impl;
 
-import org.moja.spring.core.dao.impl.RequestDAO;
+import org.moja.spring.core.dao.RequestDAO;
 import org.moja.spring.core.entity.Request;
 
 import javax.sql.DataSource;

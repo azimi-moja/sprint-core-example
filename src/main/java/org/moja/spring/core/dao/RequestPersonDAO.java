@@ -1,4 +1,4 @@
-package org.moja.spring.core.dao.impl;
+package org.moja.spring.core.dao;
 
 import org.moja.spring.core.entity.RequestPerson;
 import java.util.List;

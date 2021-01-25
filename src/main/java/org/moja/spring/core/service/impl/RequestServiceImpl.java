@@ -1,6 +1,6 @@
 package org.moja.spring.core.service.impl;
 
-import org.moja.spring.core.dao.impl.RequestDAO;
+import org.moja.spring.core.dao.RequestDAO;
 import org.moja.spring.core.entity.Request;
 import org.moja.spring.core.service.RequestService;
 

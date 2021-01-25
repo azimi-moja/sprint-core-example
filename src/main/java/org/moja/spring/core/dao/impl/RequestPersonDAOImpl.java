@@ -1,13 +1,10 @@
-package org.moja.spring.core.dao;
+package org.moja.spring.core.dao.impl;
 
-import org.moja.spring.core.dao.impl.RequestPersonDAO;
+import org.moja.spring.core.dao.RequestPersonDAO;
 import org.moja.spring.core.entity.RequestPerson;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 public class RequestPersonDAOImpl implements RequestPersonDAO {
