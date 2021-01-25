@@ -63,7 +63,9 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
 
     @Override
     public RequestPerson getRequestPersonById(int requestID) {
-        return null;
+        String query = "select * from request_person where id = ?";
+        RequestPerson person = jdbcTemplate.queryForObject(query, new RequestPersonRowMapper(), requestID);
+        return person;
     }
 
     @Override

@@ -9,7 +9,7 @@ import org.moja.spring.core.service.impl.RequestPersonServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class JdbcTemplateOneExample {
+public class JdbcTemplateExample {
 
     public static void main(String[] args) {
 
@@ -17,10 +17,16 @@ public class JdbcTemplateOneExample {
 
         RequestPersonServiceImpl requestPersonService = context.getBean("requestPersonServiceImpl", RequestPersonServiceImpl.class);
 
+        //Add request person into mysql
+        /*
         RequestPerson person = new RequestPerson();
         person.setFirstName("Moja");
         person.setLastName("Azimi Vaghar");
 
         requestPersonService.saveRequestPerson(person);
+        */
+
+        RequestPerson requestPersonById = requestPersonService.getRequestPersonById(1);
+        System.out.println(requestPersonById.toString());
     }
 }
