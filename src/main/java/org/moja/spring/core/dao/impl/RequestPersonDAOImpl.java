@@ -58,7 +58,12 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
 
     @Override
     public RequestPerson editRequestPerson(RequestPerson requestPerson) {
-        return null;
+        String query = "update request_person set first_name=? where id =?";
+        int result = jdbcTemplate.update(query, requestPerson.getFirstName(), requestPerson.getId());
+        if (result > 0) {
+            System.out.println("requestPerson is updated!!!");
+        }
+        return requestPerson;
     }
 
     @Override
@@ -70,6 +75,7 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
 
     @Override
     public List<RequestPerson> getAllRequestPersons() {
-        return null;
+        String query = "select * from request_person";
+        return jdbcTemplate.query(query, new RequestPersonRowMapper());
     }
 }
