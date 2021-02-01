@@ -3,11 +3,15 @@ package org.moja.spring.core.service.impl;
 import org.moja.spring.core.dao.impl.RequestPersonDAOImpl;
 import org.moja.spring.core.entity.RequestPerson;
 import org.moja.spring.core.service.RequestPersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RequestPersonServiceImpl implements RequestPersonService {
 
+    @Autowired
     private RequestPersonDAOImpl requestPersonDao;
 
     public void setRequestPersonDao(RequestPersonDAOImpl requestPersonDao) {

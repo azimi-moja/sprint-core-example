@@ -2,12 +2,16 @@ package org.moja.spring.core.dao.impl;
 
 import org.moja.spring.core.dao.RequestPersonDAO;
 import org.moja.spring.core.entity.RequestPerson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class RequestPersonDAOImpl implements RequestPersonDAO {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
