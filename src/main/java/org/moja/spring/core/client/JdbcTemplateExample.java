@@ -15,7 +15,7 @@ public class JdbcTemplateExample {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("JdbcTemplateOneContext.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("JdbcTemplateTwoContext.xml");
 
         RequestPersonServiceImpl requestPersonService = context.getBean("requestPersonServiceImpl", RequestPersonServiceImpl.class);
 

@@ -4,16 +4,14 @@ import org.moja.spring.core.dao.RequestPersonDAO;
 import org.moja.spring.core.entity.RequestPerson;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 public class RequestPersonDAOImpl implements RequestPersonDAO {
-    private DataSource dataSource;
+
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     /*
