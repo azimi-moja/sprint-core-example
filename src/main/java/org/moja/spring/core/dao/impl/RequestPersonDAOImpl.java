@@ -15,6 +15,7 @@ import java.util.List;
 @Repository
 public class RequestPersonDAOImpl implements RequestPersonDAO {
 
+    @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {

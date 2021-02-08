@@ -22,15 +22,16 @@
         <property name="locations" value="classpath:database.properties"/>
     </bean>
 
-    <bean id="requestPersonDao" class="org.moja.spring.core.dao.impl.RequestPersonDAOImpl">
-        <property name="jdbcTemplate" ref="namedParameterJdbcDaoSupport"/>
-    </bean>
-
     <bean id="namedParameterJdbcDaoSupport" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
     <!--clean tags because use annotations -->
+    <!--
+    <bean id="requestPersonDao" class="org.moja.spring.core.dao.impl.RequestPersonDAOImpl">
+        <property name="jdbcTemplate" ref="namedParameterJdbcDaoSupport"/>
+    </bean>
+    -->
     <!--
     <bean id="requestPersonDao" class="org.moja.spring.core.dao.impl.RequestPersonDAOImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
