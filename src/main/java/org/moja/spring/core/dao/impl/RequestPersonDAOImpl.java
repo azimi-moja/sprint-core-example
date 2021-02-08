@@ -5,24 +5,36 @@ import org.moja.spring.core.entity.RequestPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class RequestPersonDAOImpl implements RequestPersonDAO {
+public class RequestPersonDAOImpl
+        extends NamedParameterJdbcDaoSupport
+        implements RequestPersonDAO {
 
     @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private DataSource dataSource;
 
-    public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @PostConstruct
+    private void init() {
+        setDataSource(dataSource);
     }
+
     /*
-     * use jdbcTemplate (please class extend JdbcDaoSupport)
+     * use NamedParameterJdbcTemplate
+     */
+//    @Autowired
+//    private NamedParameterJdbcTemplate jdbcTemplate;
+
+    /*
+     * use jdbcTemplate (please class extends JdbcDaoSupport)
      */
 //    @Autowired
 //    private JdbcTemplate jdbcTemplate;
@@ -69,7 +81,7 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("first_name", requestPerson.getFirstName())
                 .addValue("last_name", requestPerson.getLastName());
-        RequestPerson person = jdbcTemplate.queryForObject(query, parameterSource, new RequestPersonRowMapper());
+        RequestPerson person = getNamedParameterJdbcTemplate().queryForObject(query, parameterSource, new RequestPersonRowMapper());
         if (person != null) {
             System.out.println("requestPerson is added!!!");
         }
@@ -82,7 +94,7 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
         parameterSource.addValue("first_name", requestPerson.getFirstName())
                 .addValue("last_name", requestPerson.getLastName())
                 .addValue("id", requestPerson.getId());
-        RequestPerson person = jdbcTemplate.queryForObject(query, parameterSource, new RequestPersonRowMapper());
+        RequestPerson person = getNamedParameterJdbcTemplate().queryForObject(query, parameterSource, new RequestPersonRowMapper());
         if (person != null) {
             System.out.println("requestPerson is updated!!!");
         }
@@ -94,13 +106,13 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
         String query = "select * from request_person where id = :id";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", requestID);
-        RequestPerson person = jdbcTemplate.queryForObject(query, parameterSource, new RequestPersonRowMapper());
+        RequestPerson person = getNamedParameterJdbcTemplate().queryForObject(query, parameterSource, new RequestPersonRowMapper());
         return person;
     }
 
     @Override
     public List<RequestPerson> getAllRequestPersons() {
         String query = "select * from request_person";
-        return jdbcTemplate.query(query, new RequestPersonRowMapper());
+        return getNamedParameterJdbcTemplate().query(query, new RequestPersonRowMapper());
     }
 }
