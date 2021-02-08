@@ -4,8 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="org.moja.spring.core.dao.impl" />
-    <context:component-scan base-package="org.moja.spring.core.service.impl" />
+    <context:component-scan base-package="org.moja.spring.core.dao.impl"/>
+    <context:component-scan base-package="org.moja.spring.core.service.impl"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${db.driverClassName}"/>
@@ -20,6 +20,14 @@
 
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer ">
         <property name="locations" value="classpath:database.properties"/>
+    </bean>
+
+    <bean id="requestPersonDao" class="org.moja.spring.core.dao.impl.RequestPersonDAOImpl">
+        <property name="jdbcTemplate" ref="namedParameterJdbcDaoSupport"/>
+    </bean>
+
+    <bean id="namedParameterJdbcDaoSupport" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
     <!--clean tags because use annotations -->

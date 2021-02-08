@@ -4,6 +4,8 @@ import org.moja.spring.core.dao.RequestPersonDAO;
 import org.moja.spring.core.entity.RequestPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -11,15 +13,23 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
-public class RequestPersonDAOImpl extends JdbcDaoSupport implements RequestPersonDAO {
+public class RequestPersonDAOImpl implements RequestPersonDAO {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate jdbcTemplate;
 
-    @PostConstruct
-    private void init(){
-        setJdbcTemplate(jdbcTemplate);
+    public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
+    /*
+     * use jdbcTemplate (please class extend JdbcDaoSupport)
+     */
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
+//
+//    @PostConstruct
+//    private void init() {
+//        setJdbcTemplate(jdbcTemplate);
+//    }
 
     /*
      *JDBC connection example
@@ -54,18 +64,25 @@ public class RequestPersonDAOImpl extends JdbcDaoSupport implements RequestPerso
 
     @Override
     public void saveRequestPerson(RequestPerson requestPerson) {
-        String query = "insert into request_person(first_name, last_name) VALUES(?, ?)";
-        int result = getJdbcTemplate().update(query, new Object[]{requestPerson.getFirstName(), requestPerson.getLastName()});
-        if (result > 0) {
+        String query = "insert into request_person(first_name, last_name) VALUES(:first_name, :last_name)";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("first_name", requestPerson.getFirstName())
+                .addValue("last_name", requestPerson.getLastName());
+        RequestPerson person = jdbcTemplate.queryForObject(query, parameterSource, new RequestPersonRowMapper());
+        if (person != null) {
             System.out.println("requestPerson is added!!!");
         }
     }
 
     @Override
     public RequestPerson editRequestPerson(RequestPerson requestPerson) {
-        String query = "update request_person set first_name=? where id =?";
-        int result = getJdbcTemplate().update(query, requestPerson.getFirstName(), requestPerson.getId());
-        if (result > 0) {
+        String query = "update request_person set first_name=:first_name, last_name=:last_name where id =:id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("first_name", requestPerson.getFirstName())
+                .addValue("last_name", requestPerson.getLastName())
+                .addValue("id", requestPerson.getId());
+        RequestPerson person = jdbcTemplate.queryForObject(query, parameterSource, new RequestPersonRowMapper());
+        if (person != null) {
             System.out.println("requestPerson is updated!!!");
         }
         return requestPerson;
@@ -73,14 +90,16 @@ public class RequestPersonDAOImpl extends JdbcDaoSupport implements RequestPerso
 
     @Override
     public RequestPerson getRequestPersonById(int requestID) {
-        String query = "select * from request_person where id = ?";
-        RequestPerson person = getJdbcTemplate().queryForObject(query, new RequestPersonRowMapper(), requestID);
+        String query = "select * from request_person where id = :id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", requestID);
+        RequestPerson person = jdbcTemplate.queryForObject(query, parameterSource, new RequestPersonRowMapper());
         return person;
     }
 
     @Override
     public List<RequestPerson> getAllRequestPersons() {
         String query = "select * from request_person";
-        return getJdbcTemplate().query(query, new RequestPersonRowMapper());
+        return jdbcTemplate.query(query, new RequestPersonRowMapper());
     }
 }
