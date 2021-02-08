@@ -4,18 +4,21 @@ import org.moja.spring.core.dao.RequestPersonDAO;
 import org.moja.spring.core.entity.RequestPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Repository
-public class RequestPersonDAOImpl implements RequestPersonDAO {
+public class RequestPersonDAOImpl extends JdbcDaoSupport implements RequestPersonDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    @PostConstruct
+    private void init(){
+        setJdbcTemplate(jdbcTemplate);
     }
 
     /*
@@ -52,7 +55,7 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
     @Override
     public void saveRequestPerson(RequestPerson requestPerson) {
         String query = "insert into request_person(first_name, last_name) VALUES(?, ?)";
-        int result = jdbcTemplate.update(query, new Object[]{requestPerson.getFirstName(), requestPerson.getLastName()});
+        int result = getJdbcTemplate().update(query, new Object[]{requestPerson.getFirstName(), requestPerson.getLastName()});
         if (result > 0) {
             System.out.println("requestPerson is added!!!");
         }
@@ -61,7 +64,7 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
     @Override
     public RequestPerson editRequestPerson(RequestPerson requestPerson) {
         String query = "update request_person set first_name=? where id =?";
-        int result = jdbcTemplate.update(query, requestPerson.getFirstName(), requestPerson.getId());
+        int result = getJdbcTemplate().update(query, requestPerson.getFirstName(), requestPerson.getId());
         if (result > 0) {
             System.out.println("requestPerson is updated!!!");
         }
@@ -71,13 +74,13 @@ public class RequestPersonDAOImpl implements RequestPersonDAO {
     @Override
     public RequestPerson getRequestPersonById(int requestID) {
         String query = "select * from request_person where id = ?";
-        RequestPerson person = jdbcTemplate.queryForObject(query, new RequestPersonRowMapper(), requestID);
+        RequestPerson person = getJdbcTemplate().queryForObject(query, new RequestPersonRowMapper(), requestID);
         return person;
     }
 
     @Override
     public List<RequestPerson> getAllRequestPersons() {
         String query = "select * from request_person";
-        return jdbcTemplate.query(query, new RequestPersonRowMapper());
+        return getJdbcTemplate().query(query, new RequestPersonRowMapper());
     }
 }
