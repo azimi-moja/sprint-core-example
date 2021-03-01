@@ -1,8 +1,17 @@
 package org.moja.spring.core.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "request_person")
 public class RequestPerson {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
 
     public Integer getId() {

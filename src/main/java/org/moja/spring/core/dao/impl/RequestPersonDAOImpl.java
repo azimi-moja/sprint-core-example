@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public class RequestPersonDAOImpl
         extends NamedParameterJdbcDaoSupport
-        implements RequestPersonDAO {
+        {
 
     @Autowired
     private DataSource dataSource;
@@ -75,7 +75,7 @@ public class RequestPersonDAOImpl
 //        }
 //    }
 
-    @Override
+//    @Override
     public void saveRequestPerson(RequestPerson requestPerson) {
         String query = "insert into request_person(first_name, last_name) VALUES(:first_name, :last_name)";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -87,7 +87,7 @@ public class RequestPersonDAOImpl
         }
     }
 
-    @Override
+//    @Override
     public RequestPerson editRequestPerson(RequestPerson requestPerson) {
         String query = "update request_person set first_name=:first_name, last_name=:last_name where id =:id";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -101,7 +101,7 @@ public class RequestPersonDAOImpl
         return requestPerson;
     }
 
-    @Override
+//    @Override
     public RequestPerson getRequestPersonById(int requestID) {
         String query = "select * from request_person where id = :id";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -110,7 +110,7 @@ public class RequestPersonDAOImpl
         return person;
     }
 
-    @Override
+//    @Override
     public List<RequestPerson> getAllRequestPersons() {
         String query = "select * from request_person";
         return getNamedParameterJdbcTemplate().query(query, new RequestPersonRowMapper());
